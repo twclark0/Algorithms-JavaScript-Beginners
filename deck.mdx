@@ -1,94 +1,1070 @@
 import { CodeSurferLayout, CodeSurferColumnLayout } from 'code-surfer'
+import { nightOwlFull } from 'code-surfer'
+import { Head } from 'mdx-deck'
+import './index.css'
+import { Emoji } from './Emoji.js'
+import Img from 'components/Img'
+import Footer from 'components/Footer/index.js'
+
+export const themes = [
+  nightOwlFull,
+  {
+    colors: {
+      text: '#000',
+      background: '#fff',
+      primary: '#0af',
+      black: '#000'
+    },
+    fontWeights: {
+      heading: 600,
+      bold: 600
+    },
+    text: {
+      heading: {
+        textTransform: 'uppercase',
+        letterSpacing: '0.1em'
+      }
+    },
+    styles: {
+      pre: {
+        color: 'primary',
+        bg: 'black'
+      },
+      code: {
+        color: 'primary'
+      }
+    }
+  }
+]
+
 export { nightOwlFull as theme } from 'code-surfer'
 
-<Head />
+<Head>
 
-## Algorithms in JavaScript for Beginners 👋
+  <link
+    href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,700"
+    rel="stylesheet"
+  />
+</Head>
+
+### Algorithms in JavaScript for Beginners
+
+> Tyler Clark
+
+---
+
+# :wave: Nice to meet ya
+
+> Full stack software engineer: _@pluralsight_
+
+> Twitter: _@iamtylerwclark_
+
+---
+
+##### How many feel like algorithm stuff is their least know subject?
+
+---
+
+<Emoji>✋</Emoji>
+
+---
+
+<Img url="./twitter.png" />
+
+---
+
+# Table of Contents
+
+- Recursion
+- Big O Notation
+- Data Structures
+- Hands on Example
+
+<Footer />
+
+---
+
+# Recursion
+
+- Function that calls itself
+- Has a base case escape and recursive case
+- No performance benefit over loops
+
+<Footer />
 
 ---
 
 <CodeSurferLayout>
 
-```js title="This is a title"
-function hello(name) {
-  console.log('hello ' + name)
+```js title="Recursion"
+function counter() {
+  for (let n = 0; n <= 10; n++) {
+    console.log(n)
+  }
 }
 
-hello('world')
+counter() // 0, 1, 2, 3, 4...
 ```
 
-```js 1:3 subtitle="This is a subtitle"
-function hello(name) {
-  console.log('hello ' + name)
+```js 2:4 title="Recursion"
+function counter() {
+  for (let n = 0; n <= 10; n++) {
+    console.log(n)
+  }
 }
 
-hello('world')
+counter() // 0, 1, 2, 3, 4...
 ```
 
-```js subtitle="New code is highlighted by default"
-function helloFactory() {
-  return name => {
-    console.log('hello ' + name)
-  }
+```js title="Recursion"
+function counter(n) {
+  console.log(n)
+  return counter(n + 1)
 }
 
-function hello(name) {
-  console.log('hello ' + name)
-}
-
-hello('world')
+counter(0) // 0, 1, 2, 3, 4...Infinity
 ```
 
-```js subtitle="Adding more code so I can show you how the zoom works"
-function helloFactoryBuilder() {
-  return () => () => name => {
-    console.log('hello ' + name)
-  }
+```js 3 title="Recursion"
+function counter(n) {
+  console.log(n)
+  return counter(n + 1)
 }
 
-function helloBuilder() {
-  return name => {
-    console.log('hello ' + name)
-  }
-}
-
-function helloFactory() {
-  return name => {
-    console.log('hello ' + name)
-  }
-}
-
-function hello(name) {
-  console.log('hello ' + name)
-}
-
-hello('world')
+counter(0) // 0, 1, 2, 3, 4...Infinity
 ```
 
-```js 1:23
-function helloFactoryBuilder() {
-  return () => () => name => {
-    console.log('hello ' + name)
-  }
+```js 6 title="Recursion"
+function counter(n) {
+  console.log(n)
+  return counter(n + 1)
 }
 
-function helloBuilder() {
-  return name => {
-    console.log('hello ' + name)
-  }
+counter(0) // 0, 1, 2, 3, 4...Infinity
+```
+
+```js title="Recursion"
+function counter(n) {
+  console.log(n)
+  if (n === 10) return
+  return counter(n + 1)
 }
 
-function helloFactory() {
-  return name => {
-    console.log('hello ' + name)
-  }
-}
-
-function hello(name) {
-  console.log('hello ' + name)
-}
-
-hello('world')
+counter(0) // 0, 1, 2, 3, 4...10
 ```
 
 </CodeSurferLayout>
+
+---
+
+# Recursion - That's it
+
+- Function that calls itself
+
+<Footer />
+
+---
+
+# Big O Notation
+
+- It defines how quickly the runtime of an algorithm increases as the size of the input increases
+- Is the worse case scenario of finding an answer
+- "O" syntax
+
+<Footer />
+
+---
+
+<CodeSurferLayout>
+
+```js title="Single lookup"
+const a = [1, 2, 3, 4]
+```
+
+```js title="Single lookup"
+const a = [1, 2, 3, 4]
+
+function findLastValue(a) {
+  return a[a.length]
+}
+
+console.log(findLastValue(a))
+```
+
+</CodeSurferLayout>
+
+---
+
+# O(1)
+
+<Footer />
+
+---
+
+<CodeSurferLayout>
+
+```js title="Single loop"
+const a = [1, 2, 3, 4]
+
+function find(a) {
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] === 4) {
+      return 'yes!'
+    }
+  }
+}
+```
+
+```js 4 title="Single loop"
+const a = [1, 2, 3, 4]
+
+function find(a) {
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] === 4) {
+      return 'yes!'
+    }
+  }
+}
+```
+
+</CodeSurferLayout>
+
+---
+
+# O(n)
+
+<Footer />
+
+---
+
+# Big O & Selection Sort
+
+- First loops over every item in list
+- Calls a function that loops over each item and returns the largest
+- Pushing values into a new list
+- Remove values from old list
+
+<Footer />
+
+---
+
+<CodeSurferLayout>
+
+```js title="Selection sort"
+const itemsToSort = [3, 2, 4, 1, 6]
+
+function selectionSort(list) {
+  let newList = []
+  let lrgItem
+  while (list.length) {
+    lrgItem = findLargestValue(list)
+    newList.push(list[lrgItem])
+    list.splice(lrgItem, 1)
+  }
+  return newList
+}
+```
+
+```js 6 title="Selection sort"
+const itemsToSort = [3, 2, 4, 1, 6]
+
+function selectionSort(list) {
+  let newList = []
+  let lrgItem
+  while (list.length) {
+    lrgItem = findLargestValue(list)
+    newList.push(list[lrgItem])
+    list.splice(lrgItem, 1)
+  }
+  return newList
+}
+```
+
+```js 7 title="Selection sort"
+const itemsToSort = [3, 2, 4, 1, 6]
+
+function selectionSort(list) {
+  let newList = []
+  let lrgItem
+  while (list.length) {
+    lrgItem = findLargestValue(list)
+    newList.push(list[lrgItem])
+    list.splice(lrgItem, 1)
+  }
+  return newList
+}
+```
+
+```js title="Selection sort"
+function findLargestValue(list) {
+  let lrg = list[0]
+  let indexOfLarge = 0
+  for (let i = 1; i <= list.length; i++) {
+    if (lrg < list[i]) {
+      lrg = list[i]
+      indexOfLarge = i
+    }
+  }
+  return indexOfLarge
+}
+```
+
+```js 4 title="Selection sort"
+function findLargestValue(list) {
+  let lrg = list[0]
+  let indexOfLarge = 0
+  for (let i = 1; i <= list.length; i++) {
+    if (lrg < list[i]) {
+      lrg = list[i]
+      indexOfLarge = i
+    }
+  }
+  return indexOfLarge
+}
+```
+
+```js 1:26 title="Selection sort"
+const itemsToSort = [3, 2, 4, 1, 6]
+
+function findLargestValue(list) {
+  let lrg = list[0]
+  let indexOfLarge = 0
+  for (let i = 1; i <= list.length; i++) {
+    if (lrg < list[i]) {
+      lrg = list[i]
+      indexOfLarge = i
+    }
+  }
+  return indexOfLarge
+}
+
+function selectionSort(list) {
+  let newList = []
+  let lrgItem
+  while (list.length) {
+    lrgItem = findLargestValue(list)
+    newList.push(list[lrgItem])
+    list.splice(lrgItem, 1)
+  }
+  return newList
+}
+
+selectionSort(itemsToSort)
+```
+
+</CodeSurferLayout>
+
+---
+
+# O(n \* n) or O(n^2)
+
+<Footer />
+
+---
+
+# Big O & Binary Search
+
+- Takes a sorted list
+- Jumps to middle, determines to high or low
+- Repeats until it finds the answer
+
+<Footer />
+
+---
+
+<CodeSurferLayout>
+
+```js title="Binary Search"
+const items = [1, 2, 3, 5, 7, 10, 60, 100]
+```
+
+```js title="Binary Search"
+const items = [1, 2, 3, 5, 7, 10, 60, 100]
+
+let low = 0
+let high = list.length
+let mid = Math.floor((low + high) / 2)
+```
+
+```js 4:6 title="Binary Search"
+const items = [1, 2, 3, 5, 7, 10, 60, 100]
+
+function search(list, item) {
+  let low = 0
+  let high = list.length
+  while (low <= high) {
+    let mid = Math.floor((low + high) / 2)
+    let guess = list[mid]
+    if (guess === item) return true
+    if (guess > item) high = mid - 1
+    else low = mid + 1
+  }
+  return null
+}
+```
+
+```js 7 title="Binary Search"
+const items = [1, 2, 3, 5, 7, 10, 60, 100]
+
+function search(list, item) {
+  let low = 0
+  let high = list.length
+  while (low <= high) {
+    let mid = Math.floor((low + high) / 2)
+    let guess = list[mid]
+    if (guess === item) return true
+    if (guess > item) high = mid - 1
+    else low = mid + 1
+  }
+  return null
+}
+```
+
+```js 8 title="Binary Search"
+const items = [1, 2, 3, 5, 7, 10, 60, 100]
+
+function search(list, item) {
+  let low = 0
+  let high = list.length
+  while (low <= high) {
+    let mid = Math.floor((low + high) / 2)
+    let guess = list[mid]
+    if (guess === item) return true
+    if (guess > item) high = mid - 1
+    else low = mid + 1
+  }
+  return null
+}
+```
+
+```js 9 title="Binary Search"
+const items = [1, 2, 3, 5, 7, 10, 60, 100]
+
+function search(list, item) {
+  let low = 0
+  let high = list.length
+  while (low <= high) {
+    let mid = Math.floor((low + high) / 2)
+    let guess = list[mid]
+    if (guess === item) return true
+    if (guess > item) high = mid - 1
+    else low = mid + 1
+  }
+  return null
+}
+```
+
+```js 10 title="Binary Search"
+const items = [1, 2, 3, 5, 7, 10, 60, 100]
+
+function search(list, item) {
+  let low = 0
+  let high = list.length
+  while (low <= high) {
+    let mid = Math.floor((low + high) / 2)
+    let guess = list[mid]
+    if (guess === item) return true
+    if (guess > item) high = mid - 1
+    else low = mid + 1
+  }
+  return null
+}
+```
+
+```js 11 title="Binary Search"
+const items = [1, 2, 3, 5, 7, 10, 60, 100]
+
+function search(list, item) {
+  let low = 0
+  let high = list.length
+  while (low <= high) {
+    let mid = Math.floor((low + high) / 2)
+    let guess = list[mid]
+    if (guess === item) return true
+    if (guess > item) high = mid - 1
+    else low = mid + 1
+  }
+  return null
+}
+```
+
+</CodeSurferLayout>
+
+---
+
+# O(log n)
+
+#### Log time
+
+<Footer />
+
+---
+
+# Logs
+
+- Always means log-two (2^3)
+- At 1000 items only ~10 iterations
+- At million, only ~20 iterations
+
+<Footer />
+
+---
+
+# Other Big O Notations
+
+- O (n log n) (Not to bad)
+- O(2 \* n) (Really really slow)
+- O (n!) (Extremely slow)
+
+<Footer />
+
+---
+
+# Big O Notation
+
+- How quickly the runtime grows as input grows
+- Big "O" syntax
+
+<Footer />
+
+---
+
+# Data structures
+
+- Objects
+- Arrays
+- Maps
+- Sets
+
+<Footer />
+
+---
+
+# Data structures
+
+- Linked Lists
+- Stacks & Queues
+- Trees & Graphs
+- Heaps
+- Vectors / ArrayLists
+- Hash Tables
+
+<Footer />
+
+---
+
+# Linked Lists
+
+- Stores multiple values in a linear fashion
+- Each node contains value and link to next node
+
+<Footer />
+
+---
+
+<CodeSurferLayout>
+
+```js title="Linked lists"
+function LinkedListNode(data) {
+  this.data = data
+  this.next = null
+}
+```
+
+```js 2:3 title="Linked lists"
+function LinkedListNode(data) {
+  this.data = data
+  this.next = null
+}
+```
+
+```js title="Linked lists"
+function LinkedListNode(data) {
+  this.data = data
+  this.next = null
+}
+
+const head = new LinkedListNode(1)
+```
+
+```js title="Linked lists"
+function LinkedListNode(data) {
+  this.data = data
+  this.next = null
+}
+
+const head = new LinkedListNode(1)
+head.next = new LinkedListNode(2)
+```
+
+```js 1:7 title="Linked lists"
+function LinkedListNode(data) {
+  this.data = data
+  this.next = null
+}
+
+const head = new LinkedListNode(1)
+head.next = new LinkedListNode(2)
+```
+
+```js title="Linked lists"
+head = {
+  data: 1,
+  next: {
+    data: 2,
+    next: null
+  }
+}
+```
+
+</CodeSurferLayout>
+
+---
+
+# Stacks
+
+- Last-in, first-out
+- Think call stacks, recursive functions
+
+<Footer />
+
+---
+
+<CodeSurferLayout>
+
+```js  title="Stacks"
+const stack = [1]
+```
+
+```js title="Stacks"
+const stack = [1, 2]
+```
+
+```js  title="Stacks"
+const stack = [1, 2, 3]
+```
+
+```js title="Stacks"
+const stack = [1, 2]
+```
+
+```js title="Stacks"
+const stack = [1]
+```
+
+</CodeSurferLayout>
+
+---
+
+# Stacks
+
+- pop(): Remove top item from stack
+- push(i): Add an item to top of stack
+- peek(): Return the top of stack
+- isEmpty(): Returns true if stack is empty
+
+<Footer />
+
+---
+
+<CodeSurferLayout>
+
+```js  title="Stacks"
+function createStack() {
+  const stack = [1]
+
+  return {
+    push(x) {},
+    pop(x) {},
+    peek() {},
+    isEmpty() {}
+  }
+}
+```
+
+</CodeSurferLayout>
+
+---
+
+# Queues
+
+- First-in, first-out
+- Removed in the order they are added
+
+<Footer />
+
+---
+
+<CodeSurferLayout>
+
+```js  title="Queues"
+const queue = [1]
+```
+
+```js title="Queues"
+const queue = [1, 2]
+```
+
+```js  title="Queues"
+const queue = [1, 2, 3]
+```
+
+```js title="Queues"
+const queue = [2, 3]
+```
+
+```js title="Queues"
+const queue = [3]
+```
+
+</CodeSurferLayout>
+
+---
+
+# Queues
+
+- add(): Add an item to end of list
+- remove(): remove the first item in the list
+- peek(): return the top of the queue
+- isEmpty(): return true if queue is empty
+
+<Footer />
+
+---
+
+<CodeSurferLayout>
+
+```js  title="Queues"
+function createQueue() {
+  const stack = [1]
+
+  return {
+    add(x) {},
+    remove(x) {},
+    peek() {},
+    isEmpty() {}
+  }
+}
+```
+
+</CodeSurferLayout>
+
+---
+
+# Trees & Graphs
+
+- Sometimes the most difficult to understand
+- Not linear
+- Composed as nodes with zero or more child nodes
+- Trees have a root node, cannot have cycles
+
+<Footer />
+
+---
+
+<CodeSurferLayout>
+
+```js title="Trees"
+function Node(value) {
+  this.value = value
+  this.children = []
+}
+```
+
+```js title="Trees"
+function Node(value) {
+  this.value = value
+  this.children = []
+}
+
+const terry = new Node('terry')
+```
+
+```js title="Trees"
+function Node(value) {
+  this.value = value
+  this.children = []
+}
+
+const terry = new Node('terry')
+const katie = new Node('katie')
+```
+
+```js title="Trees"
+function Node(value) {
+  this.value = value
+  this.children = []
+}
+
+const terry = new Node('terry')
+const katie = new Node('katie')
+
+terry.children.push(katie)
+```
+
+```js 1:9 title="Trees"
+{
+  value: 'terry',
+  children: [
+    {
+      value: 'katie',
+      children: []
+    }
+  ]
+}
+```
+
+</CodeSurferLayout>
+
+---
+
+# Graphs
+
+- All trees are graphs but not all graphs are trees
+- Can be cyclical
+
+<Footer />
+
+---
+
+<CodeSurferLayout>
+
+```js 1:9 title="Trees"
+{
+value: 'terry',
+children: [
+  {
+    value: 'katie',
+    children: []
+  }
+]
+}
+```
+
+```js 1:9 title="Graphs (Friends)"
+{
+  terry:  [ {name: 'katie' } ],
+  katie: [ {name: 'terry'} ],
+  hannah: [ {name: 'terry'} ]
+}
+```
+
+</CodeSurferLayout>
+
+---
+
+### Solving Algorithmic problems
+
+1. Understand the problem
+2. Write it out
+3. Break it down
+4. Refactor / Optimize
+5. Test all the things
+
+<Footer />
+
+---
+
+### Solving Algorithmic problems
+
+1. Understand the problem
+
+<Footer />
+
+---
+
+### Solving Algorithmic problems
+
+2. Write it out
+
+<Footer />
+
+---
+
+### Solving Algorithmic problems
+
+3. Break it down
+
+<Footer />
+
+---
+
+### Solving Algorithmic problems
+
+4. Refactor / Optimize
+
+<Footer />
+
+---
+
+### Solving Algorithmic problems
+
+5. Test all scenarios
+
+<Footer />
+
+---
+
+# 1# Get the job:
+
+> Write a function that multiplies two positive integers without using the \* operator
+
+<Footer />
+
+---
+
+<CodeSurferLayout>
+
+```js
+function multiply(a, b) {
+  return a
+}
+
+multiply(1, 1)
+```
+
+```js
+function multiply(a, b) {
+  return b
+}
+
+multiply(1, 2)
+```
+
+```js
+function multiply(a, b) {
+  return b
+}
+
+multiply(2, 2)
+```
+
+</CodeSurferLayout>
+
+---
+
+### (2 \* 2) == (2 + 2)
+
+<Footer />
+
+---
+
+<CodeSurferLayout>
+
+```js
+function multiply(a, b) {
+  let total = 0
+  for (let i = 1; i <= b; i++) {
+    total += a
+  }
+  return total
+}
+
+multiply(4, 5)
+```
+
+</CodeSurferLayout>
+
+---
+
+## Can we make it faster?
+
+<Footer />
+
+---
+
+<Emoji>🤔</Emoji>
+
+<Footer />
+
+---
+
+> Binary search was the process of cutting something in half
+
+<Footer />
+
+---
+
+<CodeSurferLayout>
+
+```js
+multiply(8, 8)
+```
+
+```js
+function multiply(a, b) {
+  let total = 0
+  for (let i = 1; i <= b; i++) {
+    total += a
+  }
+  return total
+}
+
+multiply(8, 8)
+```
+
+```js
+function multiply(a, b) {
+  let total = 0
+  let loopTo = b % 2 === 0 ? b / 2 : b
+  for (let i = 1; i <= loopTo; i++) {
+    total += a
+  }
+  return loopTo !== b ? total + total : total
+}
+
+multiply(8, 8)
+```
+
+</CodeSurferLayout>
+
+---
+
+### How can we make it even faster???
+
+- Make numbers divisible by two
+- Find the smallest of two numbers params
+- Try to make it recursive
+- Goal would be O(log s)
+
+<Footer />
+
+---
+
+### Solving Algorithmic problems
+
+1. Understand the problem
+2. Write it out
+3. Break it down
+4. Refactor / Optimize
+5. Test all the things
+
+<Footer />
+
+---
+
+> Everybody in this country should learn to program a computer, because it teaches you how to think
+
+_-Steve Jobs_
+
+<Footer />
+
+---
+
+# Other references
+
+- Cracking the coding interview
+- Algorithms
+- Egghead course
+
+<Footer />
+
+---
+
+### Thanks!
+
+<Footer />
+
+```
+
+```
